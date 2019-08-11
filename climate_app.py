@@ -37,12 +37,12 @@ yearBefore = dt.datetime.strftime(yearBefore, '%Y-%m-%d')
 
 @app.route("/")
 def home():
-    return (f"Welcome to Surf's Up!: Hawai'i Climate API<br/>"
+    return (f"Welcome to Surf's Up!: Hawaii's Climate API<br/>"
             f"--------------------------------------------------------------------------------------------------------------------------------------<br/>"
             f"Available Routes:<br/>"
             f"/api/v1.0/stations ----> a list of all weather observation stations<br/>"
             f"/api/v1.0/precipitaton ----> the latest year of preceipitation data<br/>"
-            f"/api/v1.0/temperature ----> the latest year of temperature data<br/>"
+            f"/api/v1.0/tobs ----> the latest year of temperature data<br/>"
             f"--------------------------------------------------------------------------------------------------------------------------------------<br/>"
             f"<!> Datesearch (yyyy-mm-dd) <!><br/>"
             f"/api/v1.0/datesearch/2015-05-30 ----> low, high, and average temp for date given and each date after<br/>"
@@ -73,8 +73,8 @@ def precipitation():
 
     return jsonify(precipData)
 
-@app.route("/api/v1.0/temperature")
-def temperature():
+@app.route("/api/v1.0/tobs")
+def tobs():
 
     results = (session.query(Measurement.date, Measurement.tobs, Measurement.station)
                       .filter(Measurement.date > yearBefore)
